@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTPS Encrypt</title>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font-awesome.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min2.css">
+</head>
+<body>
+
+    <div class="fscreen" id="fscreen">
+                
+        <div class="wrapper" id="modal-ingresar-digital">
+            <header>Modal Subir Archivos</header> 
+            <select name="" id="tipoCifrado">
+                <option value="0">Simétrico</option>
+                <option value="1">Asimétrico</option>
+            </select>              
+            <form action="#" id="formDigitales">
+
+                <input class="file-input" type="file" name="file" hidden multiple>
+                <i class="fas fa-cloud-upload-alt"></i>
+                </form>
+                <section class="uploaded-area"></section>
+                <div style="text-align: center; width: 100%">
+
+                <div class="boton-cancelar" id="boton-cancelar" style="display: inline-block; margin-right: 10px;">
+                    Cancelar
+                </div>                   
+                <div class="boton-aceptar" id="boton-aceptar" data-dismiss="modal" style="display: inline-block">
+                    Aceptar
+                </div>   
+
+        </div>       
+
+    </div>
+    
+</body>
+</html>

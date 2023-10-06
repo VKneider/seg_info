@@ -8,6 +8,9 @@ form.addEventListener("click", () =>{
 
 var data = new FormData();
 
+const selectCifrado = document.getElementById("tipoCifrado");
+
+
 
 fileInput.onchange = ({target})=> { 
 
@@ -23,9 +26,7 @@ fileInput.onchange = ({target})=> {
     }
     
     if (file && fileName) {
-      console.log("lo agarra", file);
-      data.append(fileName, file); // Añadir el objeto File, no solo el nombre del archivo
-      console.log(data);
+      data.append("file",file, fileName); // Añadir el objeto File, no solo el nombre del archivo
     } else {
       console.log("no lo agarra");
     }
@@ -41,7 +42,6 @@ fileInput.onchange = ({target})=> {
           <span class="size">${fileSize}</span>
         </div>
       </div>
-      <img src="images/basura_rojo.png" class="pointer" id="remove-${fileName}" style="width:30px;" alt=""> 
     </li>
   `;
   
@@ -67,7 +67,7 @@ function removeUploadedFile(element){
 
  if (lastIndex !== -1) {
     let fileName = id.substring(lastIndex + "remove-".length);
-    data.delete(fileName);
+    data.delete("file");
     element.parentElement.remove();
   }
 }
@@ -86,8 +86,7 @@ async function sendFile(){
       "Access-Control-Allow-Headers": "Content-Type"
     }
   
-    
-  
+
     const options={
       method: 'POST',
       body: data,
@@ -99,15 +98,23 @@ async function sendFile(){
     div.style.zIndex = "1000000";
   
     document.body.appendChild(div);
-    console.log(data)
+   
+    let url;
+    if(selectCifrado.value == "0"){
+      url = 'https://localhost/simetrico';}
+    else{
+        url = 'https://localhost/asimetrico';
+    }
+
+
+
     let request = await fetch('https://localhost/simetrico', options);
     
     let response = await request.json();
-    if(response.message=="ok"){
-      uploadedArea.innerHTML = "";
+    console.log(response);
+    if(response.success){
+      location.reload();
       document.getElementById("formDigitales").reset();
-      //data = new FormData();
-      alert("joya")
   
     }else{
       alert ("no joya")

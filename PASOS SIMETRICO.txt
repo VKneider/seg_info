@@ -1,0 +1,12 @@
+1.- Encriptar el pdf con node simetrico2
+2.- Comentar las lineas de codigo para que no se vuelva a encriptar.
+3.- Abrir el browser
+4.- Enviar el archivo encriptado
+5.- El backend se encarga de guardarlo en uploads, luego lo lee, lo desencripta y lo guarda en output_simetrico
+
+En output_simetrico va:
+1.-MINERIA_encripted (encriptar)
+2.-MINERIA_iv
+3.-MINERIA_key
+4.-MINERIA_encripted_desencriptado (desencriptar)
+

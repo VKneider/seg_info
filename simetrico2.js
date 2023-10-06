@@ -6,11 +6,9 @@ export default class Simetrico {
     constructor(inputFilePath, outputPath) {
         this.inputFilePath = inputFilePath;
         this.outputPath = outputPath;
-        this.algorithm = '';
+        this.algorithm = 'aes-256-cbc';
         this.key = '';
         this.iv = '';
-
-        this.init();
     }
 
     init() {
@@ -29,6 +27,7 @@ export default class Simetrico {
     }
 
     encriptar() {
+        this.init();
         const baseFileName = basename(this.inputFilePath, extname(this.inputFilePath));
         const outputFile = `${baseFileName}_encripted.pdf`;
 
@@ -42,11 +41,15 @@ export default class Simetrico {
 
     desencriptar() {
         const baseFileName = basename(this.inputFilePath, extname(this.inputFilePath));
-        const keyFilePath = join(this.outputPath, `${baseFileName}_key.txt`);
-        const ivFilePath = join(this.outputPath, `${baseFileName}_iv.txt`);
+
+        //remove "_encripted" from file name
+        const baseFileName2 = baseFileName.replace("_encripted", "");
+        console.log(baseFileName2)
+        const keyFilePath = join(this.outputPath, `${baseFileName2}_key.txt`);
+        const ivFilePath = join(this.outputPath, `${baseFileName2}_iv.txt`);
         const outputFile = `${baseFileName}_desencriptado.pdf`;
 
-        const encryptedBuffer = readFileSync(join(this.outputPath, `${baseFileName}_encripted.pdf`));
+        const encryptedBuffer = readFileSync(join(this.outputPath, `${baseFileName}.pdf`));
         const key = readFileSync(keyFilePath, 'utf8').trim();
         const iv = readFileSync(ivFilePath, 'utf8').trim();
 
@@ -58,10 +61,7 @@ export default class Simetrico {
     }
 }
 
-// Ejemplo de uso
-const inputFilePath = 'input.pdf'; // Ruta al archivo PDF a encriptar
-const outputPath = './output_simetrico/'; // Ruta donde se guardarán los archivos generados
-
-const simetrico = new Simetrico(inputFilePath, outputPath);
+/*
+const simetrico = new Simetrico('./files/MINERIA.pdf', './output_simetrico/');
 simetrico.encriptar();
-simetrico.desencriptar();
+*/
